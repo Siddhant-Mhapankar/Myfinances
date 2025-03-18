@@ -41,6 +41,7 @@ from settings.settings import BILLING_ENABLED
 
 # from django.contrib.auth.models imp/ort User
 # admin.register(Invoice)
+#check
 admin.site.register(
     [
         UserSettings,
