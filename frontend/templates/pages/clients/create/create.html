@@ -1,0 +1,165 @@
+{% extends base|default:"base/base.html" %}
+{% load static %}
+{% block content %}
+    <div class="card bg-base-100 p-6">
+        <form method="post">
+            {% csrf_token %}
+            <div class="divider mb-6">IDENTIFICATION DETAILS [REQUIRED]</div>
+            <div class="w-full md:w-1/3 lg:1/4">
+                <label class="label">
+                    Single
+                    <input type="checkbox"
+                           name="is_representative"
+                           class="toggle toggle-primary" />
+                    Representative
+                </label>
+            </div>
+            <div class="my-4 flex w-full  grid grid-cols-1 gap-4 md:grid-cols-2">
+                {# Client Name Card #}
+                <div class="card me-3 w-full bg-base-200 border border-base-200 hover:border-gray-400">
+                    <div class="card-body w-full">
+                        <div class="form-control w-full">
+                            <label class="label label-text justify-start">
+                                Client Name
+                                <span class="required_star">*</span>
+                            </label>
+                            <input required
+                                   id="clientName"
+                                   name="client_name"
+                                   minlength="3"
+                                   type="text"
+                                   class="peer input input-bordered w-full"
+                                   placeholder="Bob Smith" />
+                            <label class="label peer-[&amp;:not(:placeholder-shown):not(:focus):invalid]:block hidden">
+                                <span class="label-text-alt text-error">Please enter a valid client name</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                {# Client Email Card #}
+                <div class="card me-3 w-full bg-base-200 border border-base-200 hover:border-gray-400">
+                    <div class="card-body w-full">
+                        <div class="form-control w-full">
+                            <label class="label justify-start label-text">
+                                Client Email <span class="required_star">*</span>
+                            </label>
+                            <input required
+                                   id="clientEmail"
+                                   name="client_email"
+                                   minlength="4"
+                                   type="email"
+                                   class="peer input input-bordered w-full"
+                                   placeholder="bsmith@example.com" />
+                            <label class="label peer-[&amp;:not(:placeholder-shown):not(:focus):invalid]:block hidden">
+                                <span class="label-text-alt text-error">Please enter a valid client email address</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {# Client Company Card #}
+            <div data-selection="representative"
+                 class="card me-3 w-full bg-base-200 border border-base-200 hover:border-gray-400">
+                <div class="card-body w-full">
+                    <div class="form-control w-full">
+                        <label class="label label-text justify-start">
+                            Client Company
+                            <span class="required_star">*</span>
+                        </label>
+                        <input id="companyName"
+                               name="company_name"
+                               minlength="3"
+                               type="text"
+                               class="peer input input-bordered w-full"
+                               placeholder="Google" />
+                        <label class="label peer-[&amp;:not(:placeholder-shown):not(:focus):invalid]:block hidden">
+                            <span class="label-text-alt text-error">Please enter a valid company name</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="divider my-6">
+                INFORMATION STORAGE
+                <i class="text-neutral-content">[OPTIONAL]</i>
+            </div>
+            {# Client Address Card #}
+            <div class="my-4 w-full grid grid-cols-1 gap-4 md:grid-cols-2">
+                <div class="card me-3 w-full bg-base-200 border border-base-200 hover:border-gray-400">
+                    <div class="card-body w-full">
+                        <div class="form-control w-full">
+                            <label class="label" for="clientAddress">
+                                <span class="label-text">Client Address</span>
+                            </label>
+                            <textarea id="clientAddress"
+                                      name="client_address"
+                                      minlength="3"
+                                      maxlength="84"
+                                      class="peer textarea textarea-bordered w-full"
+                                      placeholder="123 London Road"></textarea>
+                            <label class="label peer-[&amp;:not(:placeholder-shown):not(:focus):invalid]:block hidden">
+                                <span class="label-text-alt text-error">Please enter a valid client address or no
+                                address</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                {# Client Phone Number Card #}
+                <div class="card me-3 w-full bg-base-200 border border-base-200 hover:border-gray-400">
+                    <div class="card-body w-full">
+                        <div class="form-control w-full">
+                            <label class="label">
+                                <span class="label-text">Client Telephone Number</span>
+                            </label>
+                            <input name="client_phone"
+                                   type="tel"
+                                   class="peer input input-bordered w-full"
+                                   placeholder="07000000000" />
+                            <label class="label peer-[&amp;:not(:placeholder-shown):not(:focus):invalid]:block hidden">
+                                <span class="label-text-alt text-error">Please enter a valid phone number</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                {# Client Main Contact Method #}
+                <div class="card me-3 w-full bg-base-200 border border-base-200 hover:border-gray-400">
+                    <div class="card-body w-full">
+                        <div class="form-control w-full">
+                            <label class="label">
+                                <span class="label-text">Client Main Contact Method</span>
+                            </label>
+                            <input name="client_contact_method"
+                                   type="text"
+                                   class="peer input input-bordered w-full"
+                                   placeholder="Enter email, phone number, etc." />
+                            <label class="label peer-[&amp;:not(:placeholder-shown):not(:focus):invalid]:block hidden">
+                                <span class="label-text-alt text-error">Please enter a valid main contact method</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn float-right w-[150px] btn-primary">Create</button>
+        </form>
+    </div>
+    <script>
+        is_rep_inp = document.querySelector('input[name="is_representative"]');
+        is_rep_div = document.querySelector('div[data-selection="representative"]');
+        company_input = document.querySelector('#companyName')
+
+        function check_is_rep() {
+            if (is_rep_inp.checked) {
+                is_rep_div.style.display = "block";
+                is_rep_inp.required = true;
+                company_input.required = true;
+
+            } else {
+                is_rep_div.style.display = "none";
+                is_rep_inp.required = false;
+                company_input.required = false;
+            }
+        }
+
+        is_rep_inp.addEventListener("change", check_is_rep);
+        check_is_rep()
+    </script>
+{% endblock content %}

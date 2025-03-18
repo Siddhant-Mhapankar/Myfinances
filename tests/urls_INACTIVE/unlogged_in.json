@@ -1,0 +1,35 @@
+{
+  "index": [
+    200
+  ],
+  "dashboard": [
+    302
+  ],
+  "login": [
+    200
+  ],
+  "logout": [
+    302
+  ],
+  "login create_account": [
+    200
+  ],
+  "login forgot_password": [
+    200
+  ],
+  "settings:dashboard": [
+    302
+  ],
+  "settings:change_password": [
+    302
+  ],
+  "finance:invoices:single:dashboard": [
+    302
+  ],
+  "receipts dashboard": [
+    302
+  ],
+  "api:finance:receipts:new": [
+    405
+  ]
+}
